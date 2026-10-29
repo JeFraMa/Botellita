@@ -1,0 +1,65 @@
+/* =====================================================
+   recuerdos.css  ->  estilos del álbum de ella (foto + nota estilo instantánea).
+   Archivo NUEVO: no modifica nada de style.css.
+   ===================================================== */
+
+/* Botón flotante: cápsula de vidrio dorado (como el reproductor), distinta a los papelitos de emociones */
+#rc-open{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:calc(78px + env(safe-area-inset-bottom));z-index:5;
+  display:flex;align-items:center;gap:8px;padding:5px 18px 5px 6px;border-radius:99px;cursor:pointer;color:#fdf6e3;
+  border:1.5px solid rgba(242,195,91,.8);background:rgba(10,31,28,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  font:600 1.25rem Caveat,cursive;box-shadow:0 8px 20px rgba(0,0,0,.4),0 0 18px rgba(242,195,91,.25);
+  transition:transform .25s,box-shadow .25s}
+#rc-open:hover,#rc-open:focus-visible{transform:translateY(-2px) scale(1.05);box-shadow:0 10px 24px rgba(0,0,0,.45),0 0 28px rgba(242,195,91,.5)}
+#rc-open:active{transform:scale(.97)}
+#rc-open svg{flex:none;width:40px;height:40px;padding:4px;border-radius:50%;background:radial-gradient(circle,#fff7dc,#f2c35b);transform:rotate(-8deg)}
+#rc-badge{position:absolute;top:-7px;right:-3px;min-width:22px;height:22px;padding:0 6px;border-radius:99px;display:grid;place-items:center;
+  background:#f59bb8;color:#2a2418;font:800 .75rem Nunito,sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+
+/* Pantalla del álbum: papel de mapa antiguo, como tu imagen de referencia */
+#rc{position:fixed;inset:0;z-index:90;display:none;overflow-y:auto;padding:calc(28px + env(safe-area-inset-top)) 16px calc(70px + env(safe-area-inset-bottom));overscroll-behavior:contain;-webkit-overflow-scrolling:touch;color:#2c2a26;
+  background:radial-gradient(circle at 50% 0,#f3e9d2,#dcc9a3 95%)}
+#rc.open{display:block}
+.rc-wrap{max-width:920px;margin:0 auto;padding-top:26px;text-align:center}
+.rc-close{position:fixed;top:max(12px,env(safe-area-inset-top));right:14px;z-index:2;width:40px;height:40px;border:0;border-radius:50%;
+  background:#fbfaf6;color:#5a3e22;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 10px rgba(60,40,10,.3)}
+#rc .rc-title{color:#5a3e22}
+.rc-sub{margin:8px auto 0;max-width:38ch;color:#6b5a3e}
+
+/* La foto instantánea (sirve para el formulario, el álbum y el papelito) */
+.pola{position:relative;background:#fbfaf6;padding:12px 12px 14px;border-radius:3px;text-align:left;
+  box-shadow:0 12px 26px rgba(60,40,10,.35);transform:rotate(var(--r,0deg))}
+.pola::before{content:"";position:absolute;top:-11px;left:50%;width:84px;height:22px;margin-left:-42px;
+  background:rgba(214,184,128,.72);transform:rotate(-3deg);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.pola .ph{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#e6e1d4}
+.pola .cap{display:block;width:100%;min-height:3.4em;padding-top:10px;color:#2c2a26;
+  font:600 1.35rem/1.2 Caveat,cursive;white-space:pre-wrap;overflow-wrap:anywhere}
+.pola .fecha{display:block;margin-top:4px;font:700 .72rem Nunito,sans-serif;opacity:.5}
+
+/* Formulario (una polaroid en blanco) */
+#rc-form{width:min(88vw,330px);margin:34px auto 0}
+.pola .pick{display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;text-align:center;
+  border:2px dashed #b9ad92;color:#8a7a5c;font:600 1.3rem/1.2 Caveat,cursive;background-size:cover;background-position:center}
+.pick.has{border-color:transparent;color:transparent}
+.pick:focus-within{outline:2px solid #e07a9a;outline-offset:3px}
+.rc-file{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+textarea.cap{border:0;border-bottom:1px dashed #cbbf9f;background:transparent;resize:none;outline:0}
+#rc-em{width:100%;margin-top:10px;padding:.5em .6em;border:1px solid #d6c9a8;border-radius:8px;background:#fff;
+  font:700 1rem Nunito,sans-serif;color:#2c2a26}
+.rc-btn{display:block;width:100%;margin-top:12px;padding:.6em 1em;border:0;border-radius:99px;cursor:pointer;
+  background:#e07a9a;color:#fff;font:italic 500 1.15rem Fraunces,Georgia,serif;box-shadow:0 6px 14px rgba(120,40,70,.3)}
+.rc-btn:hover{filter:brightness(1.07)}
+.rc-msg{min-height:1.4em;margin-top:8px;font:700 .9rem Nunito,sans-serif;color:#7a4a5a;text-align:center}
+
+/* Álbum */
+.rc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:36px 24px;margin-top:40px;padding:0 6px}
+.rc-grid .pola{animation:rc-pop .5s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes rc-pop{from{transform:scale(.6) rotate(-12deg);opacity:0}}
+.rc-del{position:absolute;top:-8px;right:-8px;z-index:2;width:28px;height:28px;border:0;border-radius:50%;cursor:pointer;
+  background:#c0564a;color:#fff;font-size:.8rem;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.rc-empty{grid-column:1/-1;color:#7a6a4c;font:600 1.4rem Caveat,cursive}
+
+/* Su papelito dentro de la sala (cuando sale del frasco) */
+.paper .pola{max-width:300px;margin:16px auto 0}
+
+/* Papelito rosa extra dentro del frasco (cada recuerdo suyo suma uno) */
+.note-ella{outline:1px solid rgba(255,255,255,.5)}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a1f1c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Mi botellita">
+  <title>Mi botellita de emociones</title>
+  <!-- Tipografías: Fraunces (títulos), Caveat (papelitos a mano), Nunito (texto) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:ital,wght@1,500&family=Nunito:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Álbum de ella (foto + nota) -->
+  <link rel="stylesheet" href="css/recuerdos.css">
+</head>
+<body>
+  <!-- Capas de efectos: partículas de fondo y confeti -->
+  <canvas id="fx-bg"></canvas>
+  <canvas id="fx-confetti"></canvas>
+
+  <!-- VISTA 1: el frasco con todas las emociones alrededor -->
+  <main id="home" class="view active">
+    <h1>Mi botellita de emociones</h1>
+    <p class="sub">Elige cómo te sientes hoy y sacamos un papelito para ti.</p>
+    <div class="stage">
+      <div class="jar" id="jar-home"></div>
+      <div id="tags"></div>
+    </div>
+  </main>
+
+  <!-- VISTA 2: una emoción (se rellena desde js/app.js) -->
+  <section id="room" class="view">
+    <button class="back" id="back">‹ Volver al frasco</button>
+    <h2 id="room-title"></h2>
+    <p class="sub" id="room-intro"></p>
+    <div class="jar" id="jar-room"></div>
+    <button class="cta" id="draw">Sacar un papelito</button>
+    <article class="paper" id="paper" hidden></article>
+  </section>
+
+  <div id="curtain"></div>
+  <button id="bug" title="¿Y esto?" aria-label="Sorpresa escondida">🪲</button>
+  <div id="toast" role="status"></div>
+
+  <!-- Reproductor de música (las canciones se configuran en js/data.js) -->
+  <div id="player">
+    <button id="pl-btn" aria-label="Reproducir o pausar">▶</button>
+    <span id="pl-name">Cargando música…</span>
+    <button id="pl-next" aria-label="Siguiente canción">⏭</button>
+    <input id="pl-vol" type="range" min="0" max="1" step="0.05" value="0.5" aria-label="Volumen">
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Álbum de ella (foto + nota): va después de app.js -->
+  <script src="js/recuerdos.js"></script>
+</body>
+</html>
